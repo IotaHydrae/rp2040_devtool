@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(rp2040_devtool)
 
+add_subdirectory(tests)
+
 add_executable(rp2040_devtool main.c)
 
 add_subdirectory(src/picoboot_connection)
