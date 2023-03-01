@@ -38,8 +38,21 @@ int endpoint_out;
 int endpoint_in;
 int interface_n;
 int num_devices;
+int packet_size;
 libusb_device *dev, * *devs;
 libusb_device_handle *dev_handle;
+
+struct usb_mouse {
+    int ep_in;
+    int ep_out;
+    int interface;
+
+    libusb_device *dev;
+    libusb_device_handle *dev_handle;
+
+    int packet_size;
+    unsigned char *packet_data;
+};
 
 enum usb_device_result {
     dr_vidpid_ok,
