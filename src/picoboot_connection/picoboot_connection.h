@@ -64,7 +64,13 @@ int picoboot_peek(libusb_device_handle *usb_device, uint32_t addr, uint32_t *dat
 #define PAGE_SIZE (1u << LOG2_PAGE_SIZE)
 #define FLASH_SECTOR_ERASE_SIZE 4096u
 
-#define picoboot_cmd_warpper(handle, fcall) do { picoboot_exclusive_access(handle, 1); fcall; picoboot_exclusive_access(handle, 0);} while (0)
+#define picoboot_cmd_warpper(handle, fcall) do {  \
+    if (dev_handle) {   \
+        picoboot_exclusive_access(handle, 1);   \
+        fcall; \
+        picoboot_exclusive_access(handle, 0);   \
+    }   \
+} while (0)
 
 enum memory_type {
     rom,

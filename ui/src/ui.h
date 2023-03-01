@@ -24,19 +24,28 @@ extern "C" {
 
 extern lv_obj_t * ui_ScreenHome;
 extern lv_obj_t * ui_ImageBG;
-extern lv_obj_t * ui_ButtonSettings;
-extern lv_obj_t * ui_Image2;
-extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_Button3;
-extern lv_obj_t * ui_Image3;
-extern lv_obj_t * ui_Label2;
-extern lv_obj_t * ui_Button4;
-extern lv_obj_t * ui_Image4;
-extern lv_obj_t * ui_Label3;
+extern lv_obj_t * ui_ButtonMemory;
+extern lv_obj_t * ui_ImageMemory;
+extern lv_obj_t * ui_LabelMemory;
+extern lv_obj_t * ui_ButtonLog;
+extern lv_obj_t * ui_ImageLog;
+extern lv_obj_t * ui_LabelLog;
+extern lv_obj_t * ui_ButtonSetting;
+extern lv_obj_t * ui_ImageSetting;
+extern lv_obj_t * ui_LabelSetting;
+extern lv_obj_t * ui_ScreenMemory;
+extern lv_obj_t * ui_ImageBG2;
+extern lv_obj_t * ui_Roller2;
+extern lv_obj_t * ui_PanelToolDetail;
+extern lv_obj_t * ui_Button6;
+extern lv_obj_t * ui_Image7;
 
 
 LV_IMG_DECLARE(ui_img_background_png);    // assets/background.png
+LV_IMG_DECLARE(ui_img_flash_png);    // assets/flash.png
+LV_IMG_DECLARE(ui_img_log_png);    // assets/log.png
 LV_IMG_DECLARE(ui_img_setting_png);    // assets/setting.png
+LV_IMG_DECLARE(ui_img_back_png);    // assets/back.png
 
 
 LV_FONT_DECLARE(ui_font_FiraCodeSemiBold20);

@@ -109,20 +109,34 @@ int picoboot_init()
 
     if (i == num_devices) {
         printf("device not founded! exiting ...\n");
-        goto err_exit;
+        // goto err_exit;
     }
 
-err_exit:
-    libusb_close(dev_handle);
-    libusb_exit(NULL);
+// err_exit:
+//     libusb_close(dev_handle);
+//     libusb_exit(NULL);
 
     return 0;
+}
+
+static void rpt_btn_cb(lv_event_t *event)
+{
+    printf("obj has been Long Pressed!\n");
+    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
+    lv_scr_load(ui_ScreenMemory);
+}
+
+static void rpt_btn_back_cb(lv_event_t *event)
+{
+    printf("obj has been Long Pressed!\n");
+    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
+    lv_scr_load(ui_ScreenHome);
 }
 
 int main(int argc, char **argv)
 {
     /* making a test reboot */
-    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
+    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200))
     (void)argc; /*Unused*/
     (void)argv; /*Unused*/
 
@@ -132,8 +146,13 @@ int main(int argc, char **argv)
     /*Initialize the HAL (display, input devices, tick) for LVGL*/
     hal_init();
 
+    picoboot_init();
+
     // lv_demo_stress();
     ui_init();
+
+    lv_obj_add_event_cb(ui_ButtonMemory, rpt_btn_cb, LV_EVENT_PRESSED, NULL);
+    lv_obj_add_event_cb(ui_Button6, rpt_btn_back_cb, LV_EVENT_PRESSED, NULL);
 
     while (1) {
         /* Periodically call the lv_task handler.
