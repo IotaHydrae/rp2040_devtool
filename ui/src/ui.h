@@ -35,10 +35,11 @@ extern lv_obj_t * ui_ImageSetting;
 extern lv_obj_t * ui_LabelSetting;
 extern lv_obj_t * ui_ScreenMemory;
 extern lv_obj_t * ui_ImageBG2;
-extern lv_obj_t * ui_Roller2;
+extern lv_obj_t * ui_RollerTools;
 extern lv_obj_t * ui_PanelToolDetail;
-extern lv_obj_t * ui_Button6;
-extern lv_obj_t * ui_Image7;
+extern lv_obj_t * ui_ButtonBack;
+extern lv_obj_t * ui_ButtonReboot;
+extern lv_obj_t * ui_LabelReboot;
 
 
 LV_IMG_DECLARE(ui_img_background_png);    // assets/background.png

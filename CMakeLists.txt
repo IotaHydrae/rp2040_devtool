@@ -7,7 +7,7 @@ set(CMAKE_SYSTEM_NAME Linux)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
 
 file(GLOB_RECURSE INCLUDES "lvgl/*.h" "lv_drivers/*.h"  "./*.h")
-file(GLOB_RECURSE SOURCES  "lvgl/src/*.c" "lv_drivers/*.c" "./mouse_cursor_icon.c")
+file(GLOB_RECURSE SOURCES  "lvgl/src/*.c" "lv_drivers/*.c" "./mouse_cursor_icon.c" "misc/*.c")
 
 add_executable(rp2040_devtool main.c ${SOURCES} ${INCLUDES})
 

@@ -36,6 +36,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pthread.h>
 #include <libusb-1.0/libusb.h>
 #define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain" issue*/
 #include <SDL2/SDL.h>
@@ -43,6 +44,9 @@
 #include "lvgl/demos/lv_demos.h"
 #include "lv_drivers/sdl/sdl.h"
 #include "ui/src/ui.h"
+
+#include "event.h"
+#include "anim.h"
 
 #include "picoboot_connection.h"
 
@@ -78,8 +82,7 @@ libusb_device_handle *dev_handle;
 //     uint16_t dTransferLength;    /* 0x0c */
 //     int args[4];   /* 0x10 */
 // };
-
-int picoboot_init()
+int picoboot_scan()
 {
     int i, rc;
     int num_devices;
@@ -108,29 +111,32 @@ int picoboot_init()
     }
 
     if (i == num_devices) {
-        printf("device not founded! exiting ...\n");
+        printf("device not founded!\n");
         // goto err_exit;
     }
 
-// err_exit:
-//     libusb_close(dev_handle);
-//     libusb_exit(NULL);
+    // err_exit:
+    //     libusb_close(dev_handle);
+    //     libusb_exit(NULL);
 
     return 0;
 }
 
-static void rpt_btn_cb(lv_event_t *event)
+int picoboot_init()
 {
-    printf("obj has been Long Pressed!\n");
-    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
-    lv_scr_load(ui_ScreenMemory);
+    picoboot_scan();
+    return 0;
 }
 
-static void rpt_btn_back_cb(lv_event_t *event)
+int picoboot_loop()
 {
-    printf("obj has been Long Pressed!\n");
-    // picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
-    lv_scr_load(ui_ScreenHome);
+    return 0;
+}
+
+static void rpt_btn_reboot_cb(lv_event_t *event)
+{
+    picoboot_cmd_warpper(dev_handle, picoboot_reboot(dev_handle, 0, 0, 200));
+    // lv_scr_load(ui_ScreenHome);
 }
 
 int main(int argc, char **argv)
@@ -150,10 +156,12 @@ int main(int argc, char **argv)
 
     // lv_demo_stress();
     ui_init();
+    anim_setup();
+    event_setup();
 
-    lv_obj_add_event_cb(ui_ButtonMemory, rpt_btn_cb, LV_EVENT_PRESSED, NULL);
-    lv_obj_add_event_cb(ui_Button6, rpt_btn_back_cb, LV_EVENT_PRESSED, NULL);
+    lv_obj_add_event_cb(ui_ButtonReboot, rpt_btn_reboot_cb, LV_EVENT_PRESSED, NULL);
 
+    // lv_obj_add_event_cb(ui_ButtonMemory, rpt_btn_cb, LV_EVENT_PRESSED, NULL);
     while (1) {
         /* Periodically call the lv_task handler.
          * It could be done in a timer interrupt or an OS task too.*/

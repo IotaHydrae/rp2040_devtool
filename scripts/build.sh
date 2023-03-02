@@ -115,6 +115,11 @@ function do_clean() {
     cd -
 }
 
+function do_run() {
+    echo "running target ..."
+    ./${BIN}
+}
+
 case $1 in
 
     "-h")
@@ -128,6 +133,17 @@ case $1 in
         echo "do a clean job"
         do_banner
         do_clean
+        exit 0
+        ;;
+
+    "-r")
+        echo "do a build process, then run"
+        do_banner
+        do_configure
+        do_post_build
+        do_compile
+        do_install
+        do_run
         exit 0
         ;;
 
