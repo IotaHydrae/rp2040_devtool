@@ -19,5 +19,4 @@ add_subdirectory(tests)
 set(CMAKE_BUILD_TYPE "Release")
 
 target_include_directories(rp2040_devtool PUBLIC "include")
-target_link_libraries(rp2040_devtool ui SDL2 pthread picoboot_connection usb-1.0
-        asound tinyalsa pthread swscale avformat avcodec avutil avfilter swresample)
+target_link_libraries(rp2040_devtool ui SDL2 pthread picoboot_connection usb-1.0)
